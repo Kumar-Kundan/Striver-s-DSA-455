@@ -1,0 +1,11 @@
+class Solution {
+  public:
+    void printTriangle(int n) {
+        char ch=65+n-1;     //if n=5 then ch='E'
+        for(int i=0;i<n;++i){
+            for(int j=0;j<=i;++j)
+                cout<<char(ch-j)<<" ";
+            cout<<endl;
+        }
+    }
+};
