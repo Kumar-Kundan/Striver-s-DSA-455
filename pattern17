@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    void printTriangle(int n) {
+        char ch=65;    //for character 'A'
+        for(int i=0;i<n;++i){
+            for(int space=0;space<n-i-1;++space)
+                cout<<" ";
+                
+            //for left part
+            for(int j=0;j<=i;++j)
+                cout<<char(ch+j);
+                
+            //for right part
+            for(int k=i;k>0;--k)
+                cout<<char(ch+k-1);
+            cout<<endl;
+        }
+    }
+};
