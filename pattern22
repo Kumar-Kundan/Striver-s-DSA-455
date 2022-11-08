@@ -1,0 +1,33 @@
+class Solution {
+  public:
+    void printSquare(int n) {
+        int count=0;
+        for(int i=0;i<2*n-1;++i){
+            for(int j=0;j<2*n-1;++j){
+                
+                //for upward of the forward diagonals
+                if(i+j<2*n-1){
+                    
+                    //taking column or row number which is less
+                    if(i<j)
+                        count=i;
+                    else
+                        count=j;
+                    cout<<n-count<<" ";
+                }
+                
+                //for downward of the forward diagonal
+                else{
+                    
+                    //taking column or row number which is greater
+                    if(i>j)
+                        count=i;
+                    else
+                        count=j;
+                    cout<<count-n+2<<" ";
+                }
+            }
+            cout<<endl;
+        }
+    }
+};
