@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    long long reversedBits(long long X) {
+        char temp;
+        
+        //converting X to binary
+        string buffer2=bitset<32> (X).to_string();
+        
+        //reversing a string
+        for(int i=0;i<buffer2.size()/2;++i){
+            temp=buffer2[i];
+            buffer2[i]=buffer2[32-i-1];
+            buffer2[32-i-1]=temp;
+        }
+        
+        //converting binary to long long
+        return stoll(buffer2,nullptr,2);
+    }
+};
