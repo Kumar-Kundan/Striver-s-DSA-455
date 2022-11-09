@@ -1,0 +1,21 @@
+class Solution{
+public:
+    int evenlyDivides(int N){
+        int count=0,r;
+        int copyNum=N;
+        
+        while(copyNum>0){
+            
+            //Finding digit of the number
+            r=copyNum%10;
+            
+            //checking the digit is 0 or not
+            if(r!=0){
+              if(N%r==0)
+                ++count;
+            }
+            copyNum=copyNum/10;
+        }
+        return count;
+    }
+};
