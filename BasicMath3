@@ -1,0 +1,21 @@
+class Solution
+{
+	public:
+		string is_palindrome(int n)
+		{
+		    //converting int n to string
+		    string s=to_string(n);
+		    
+		    //saving to another string variable
+		    string newStr=s;
+		    
+		    //reversing the string s
+		    reverse(s.begin(),s.end());
+		    
+		    //checking for equality
+		    if(s==newStr)
+		       return "Yes";
+		    else
+		       return "No";
+		}
+};
