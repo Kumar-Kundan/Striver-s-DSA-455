@@ -1,0 +1,27 @@
+class Solution {
+  public:
+    vector<long long> lcmAndGcd(long long A , long long B) {
+        long long r,great,small;
+        
+        //Finding greater and lesser number
+        if(A>B){
+           great=A;
+           small=B;
+        }
+        else{
+            great=B;
+            small=A;
+        }
+        
+        //Finding GCD
+        while(r>0){
+            r=great%small;
+            great=small;
+            small=r;
+        }
+        
+        vector<long long>lcmGcd={(A*B)/great,great};
+        
+        return lcmGcd;
+    }
+};
