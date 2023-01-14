@@ -1,0 +1,14 @@
+int remove_duplicate(int a[],int n){
+        // code here
+        int i=0;
+        for(int j=1;j<n;j++){
+            
+            //if ith element is not 
+            //equal to jth element then increment i and assign to jth element to ith;
+            if(a[i]!=a[j]){
+                i++;
+                a[i]=a[j];
+            }
+        }
+        return i+1;
+    }
