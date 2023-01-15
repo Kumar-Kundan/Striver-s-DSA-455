@@ -1,0 +1,42 @@
+// class Solution{   
+// public:
+//     void leftRotate(int arr[], int n, int d) {
+//         // code here
+//         int auxArr[d];
+        
+//         //taking d size auxiliary array to store first d element of array arr
+//         for(int i=0;i<d;++i)
+//             auxArr[i]=arr[i];
+            
+//         //shifting first d element to the last of array arr
+//         for(int j=0;j<n;++j){
+//             if(j<n-d)
+//               arr[j]=arr[j+d];
+//             else
+//               arr[j]=auxArr[j+d-n];
+//         }
+//     }
+// };
+   class Solution{
+       public:
+       void leftRotate(int arr[],int n, int d){
+           //reversing first d elements
+           reverse(arr,0,d-1);
+           
+           //reversing last n-d elements
+           reverse(arr,d,n-1);
+           
+           //reversing whole array
+           reverse(arr,0,n-1);
+       }
+       void reverse(int arr[],int p,int r){
+           int temp;
+           //swapping first half to second half elements
+           while(p<r){
+               temp=arr[p];
+               arr[p]=arr[r];
+               arr[r]=temp;
+               p++;r--;
+           }
+       }
+    };
