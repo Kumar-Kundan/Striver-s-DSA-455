@@ -1,0 +1,32 @@
+//Leetcode
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int max1=0,count1=0;
+        for(auto bin:nums){
+            //if count of 1 is greater than max of 1 then copy 
+            // and always change count to 0 whenever 0 occur
+            //else increase count by 1
+            if(bin==0){
+                if(count1>max1){
+                   max1=count1;
+                }
+                count1=0;
+            }
+            else
+                count1++;
+        }
+        //for the case whenever arrays ends with 1
+        if(count1>max1)
+            max1=count1;
+        return max1;
+    }
+    // int findMaxConsecutiveOnes(vector<int>& nums) {
+    //     int max_cnt = 0, cnt = 0;
+    //     for (auto n : nums) {
+    //         if (n == 1) max_cnt = max(++cnt, max_cnt);
+    //         else cnt = 0;
+    //     }
+    //     return max_cnt;
+    // }
+};
