@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int result=0;
+
+        //using the Xor property, a^a^b=b,a^a=0,0^b=b
+        for(auto num:nums)
+            result^=num;
+        return result; 
+    }
+};
