@@ -1,0 +1,95 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+class Solution{
+public:
+// 	int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
+// 	    int max=0,index=-1,sum=0;
+// 	    for(int i=0;i<n;i++){
+// 	        sum=0;
+//          //summing all the ones in a row
+// 	        for(int j=0;j<m;++j){
+// 	            sum=sum+arr[i][j];
+// 	        }
+//          //if sum is greater than max then max=sum
+// 	        if(sum>max){
+// 	            max=sum;
+// 	            index=i;
+// 	        }
+// 	    }
+// 	    return index;
+// 	}
+//  time complexity=O(m*n)
+//  space complexity=O(1)
+  
+    // int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
+    //     int j,index=-1,max=0;
+    //     for(int i=0;i<n;++i){
+    //         j=0;
+    //         //counting number of 0 
+    //         while(arr[i][j]!=1 && j<m)
+    //             ++j;
+    //         //storing maximum number of ones
+    //         if(m-j>max){
+    //             max=m-j;
+    //             index=i;
+    //         }
+    //     }
+    //     return index;
+    // }
+    
+    
+    // int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
+    //     //finding first 1 by traversing columnwise
+    //     for(int j=0;j<m;++j){
+    //         for(int i=0;i<n;++i){
+    //             if(arr[i][j]==1)
+    //                 return i;
+    //         }
+    //     }
+    //     return -1;
+    // }
+    
+    
+    int rowWithMax1s(vector<vector<int> > arr, int n, int m) {
+        int j=m-1,i=0,index=-1;
+        
+        while(i<n && j>=0){
+            //increasing j when 1 occurs from back of first row
+            if(arr[i][j]==1){
+                --j;
+                index=i;
+            }
+            //increasing i when 0 occurs
+            else
+                ++i;
+        }
+        return index;
+    }
+
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+        vector< vector<int> > arr(n,vector<int>(m));
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                cin>>arr[i][j];
+            }
+        }
+        Solution ob;
+        auto ans = ob.rowWithMax1s(arr, n, m);
+        cout << ans << "\n";
+    }
+    return 0;
+}
+
+// } Driver Code Ends
