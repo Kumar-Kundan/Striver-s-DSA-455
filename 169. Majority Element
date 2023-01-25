@@ -1,0 +1,61 @@
+class Solution {
+public:
+    // int majorityElement(vector<int>& nums) {
+    //    int size=nums.size();
+    //    unordered_map<int,int> hash;
+
+    //    //counting element in a hash table
+    //    for(int i=0;i<size;++i){
+    //         if(hash.find(nums[i])==hash.end())
+    //            hash[nums[i]]=1;
+    //         else
+    //            ++hash[nums[i]];
+    //    }
+
+    //    //returning the element which count is greater than size/2
+    //    //in a hash table
+    //    for(auto i:hash){
+    //        if(i.second>size/2)
+    //            return i.first;
+    //    }
+    //    return -1;
+    // }
+
+    //Moore Voting Algorithm
+    int majorityElement(vector<int>& nums) {
+        int counter=0,majElement;
+        for(auto num:nums){
+            //when counter becomes 0 majority element will be num
+            //Always a majority element count is greater
+            if(!counter)
+                majElement=num;
+            
+            //increment counter when num=majority element
+            //decrement counter when num!=majority element
+            num==majElement?++counter:--counter;
+        }
+        return majElement;
+    }
+
+    // //By bit manipulation
+    // int majorityElement(vector<int>& nums) {
+    //     int count=0,size=nums.size();
+    //     int result=0;
+
+    //     //for total 32-bit
+    //     for(int i=0;i<32;++i){
+    //         int count=0;
+
+    //         for(auto num:nums)
+    //             //if ith bit is 1 then increment count
+    //             if(num & (1<<i))
+    //                 ++count;
+    //         //when count of 1 is greater than size/2 then
+    //         //binary addition to result by ith shifting
+    //         //else don't do anything
+    //         if(count>size/2)
+    //             result+=(1<<i);
+    //     }
+    //     return result;
+    // }
+};
