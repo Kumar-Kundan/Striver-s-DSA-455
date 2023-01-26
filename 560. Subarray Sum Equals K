@@ -1,0 +1,59 @@
+class Solution {
+public:
+    // int subarraySum(vector<int>& nums, int k) {
+    //     int sum,count=0;
+    //     int size=nums.size();
+
+    //     //for iterating all elements in the array
+    //     for(int i=0;i<size;++i){
+    //         sum=0;
+    //         //finding sum from ith element to last element
+    //         for(int j=i;j<size;++j){
+    //             sum+=nums[j];
+
+    //             //for all cases like [1,-1,0],k=0
+    //             if(sum==k)
+    //                 count++;
+    //         }
+    //     }
+    //     return count;
+    // }
+    // //time complexity=O(n^2)
+    // //space complexity=O(1)
+
+    int subarraySum(vector<int>& arr, int k) {
+        int n = arr.size(); // take the size of the array
+        
+        int prefix[n]; // make a prefix array to store prefix sum
+        
+        prefix[0] = arr[0]; // for element at index at zero, it is same
+        
+        // storing prefix sum
+        for(int i = 1; i < n; i++)
+            prefix[i] = arr[i] + prefix[i - 1];
+        
+        unordered_map<int,int> mp; 
+        int count = 0; 
+        
+        for(int i = 0; i < n; i++) // traverse from the prefix array
+        {
+        // if it already becomes equal to k, then increment count
+            if(prefix[i] == k) 
+                count++;
+            
+            //find whether (prefix[i] - k) present in map or not
+            if(mp.find(prefix[i] - k) != mp.end())
+            {
+                //adding all subarrays that left upto ith element
+                //in original array
+                count += mp[prefix[i] - k]; 
+            }
+            //incrementing each time when prefix[i] is 
+            //found in map
+            mp[prefix[i]]++; 
+        }
+        return count; 
+    }
+    //time complexity=O(n)
+    //space complexity=O(n)
+};
