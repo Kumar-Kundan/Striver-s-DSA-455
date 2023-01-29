@@ -1,0 +1,38 @@
+class Solution {
+public:
+    // int maxSubArray(vector<int>& nums) {
+    //     int maxSum=INT32_MIN,sum;
+    //     int size=nums.size();
+
+    //     for(int i=0;i<size;++i){
+    //         sum=0;
+    //         for(int j=i;j<size;++j){
+    //             sum+=nums[j];
+    //             if(maxSum<sum)
+    //                  maxSum=sum;
+    //         }
+    //     }
+    //     return maxSum;
+    // }
+    
+    //time limit exceeded
+    //time complexity-O(n^2)
+
+    //Kadane's algorithm
+
+    int maxSubArray(vector<int>& nums) {
+        int sum=0,maxSum=nums[0];
+
+        for(int i=0;i<nums.size();++i){
+            sum+=nums[i];
+            maxSum=max(sum,maxSum);
+
+            //why I take that subarray whose sum is -ve
+            //adding new number will be decreased in both case 
+            //positive and negative 
+            if(sum<0)
+                sum=0;
+        }
+        return maxSum;
+    }
+};
