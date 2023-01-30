@@ -1,0 +1,15 @@
+class Solution{
+    public:
+        long long pairWithMaxSum(long long arr[], long long N)
+    {
+        long long max=arr[0]+arr[1],sum;
+        
+        for(int i=1;i<N-1;++i){
+            //smallest and second smallest always occur in consecutive
+            sum=arr[i]+arr[i+1];
+            if(max<sum)
+                max=sum;
+        }
+        return max;
+    }
+};
