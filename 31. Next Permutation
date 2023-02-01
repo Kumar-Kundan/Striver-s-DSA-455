@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int size=nums.size();
+
+        int i=size-1;
+        //finding the change from increasing to decreasing order
+        //from right end
+        while(i>0 && nums[i]<=nums[i-1])
+            --i;
+
+        if(i!=0){
+            //finding larger element than nums[i-1]
+            int j=size-1;
+            while(nums[i-1]>=nums[j] && j>=i)
+                --j;
+
+            //swapping nums[i-1] and nums[j]
+            int temp=nums[i-1];
+            nums[i-1]=nums[j];
+            nums[j]=temp;
+        }  
+        //reversing element from ith element to end
+        reverse(nums.begin()+i,nums.end());
+    }
+};
