@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        //when the array is empty
+        if(nums.size() == 0)
+        return 0;
+
+        unordered_map<int,int> hash;
+        int maxConj=1,count;
+
+        //inserting all the elements of array to hash table
+        for(auto num:nums)
+            hash[num]=0;
+        
+        for(auto num:nums){
+            //when num-1 not exist in hash table then 
+            //count consecutive sequence i.e.,
+            //counting from minimum number in consecutive sequence
+            if(!hash.count(num-1)){
+                count=1;
+                //checking num+1 exists in hash table or not
+                while(hash.count(num+1)){
+                    num=num+1;
+                    ++count;
+                }
+                //checking that count of other sequence is greater
+                // or less
+                if(maxConj<count)
+                    maxConj=count;
+            }
+        }
+        return maxConj;
+    }
+};
