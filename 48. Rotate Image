@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int temp,n=matrix.size();
+        //reversing along (row+main diagonal)=90 degree rotating
+        //reversing along row
+        for(int i=0;i<n/2;++i){
+            for(int j=0;j<n;++j){
+                temp=matrix[i][j];
+                matrix[i][j]=matrix[n-i-1][j];
+                matrix[n-i-1][j]=temp;
+            }
+        }
+
+        //reversing along main diagonal or transpose of matrix
+        for(int i=0;i<n;++i){
+            for(int j=i;j<n;++j){
+                temp=matrix[i][j];
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]=temp;
+            }
+        }
+    }
+};
