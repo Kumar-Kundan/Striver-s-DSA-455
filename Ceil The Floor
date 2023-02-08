@@ -1,0 +1,83 @@
+//GFG question
+//{ Driver Code Starts
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+pair<int, int> getFloorAndCeil(int arr[], int n, int x);
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x;
+        cin >> n >> x;
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        auto ans = getFloorAndCeil(arr, n, x);
+        cout << ans.first << " " << ans.second << "\n";
+    }
+    return 0;
+}
+
+// } Driver Code Ends
+
+
+// pair<int, int> getFloorAndCeil(int arr[], int n, int x) {
+//         int first=0,last=n-1;
+//         int mid;
+//         //sorting the array
+//         sort(arr,arr+n);
+        
+//         //when target x is larger than largest element in array
+//         arr[n]=-1;
+        
+//         while(first<=last){
+//             //It is equal to (first+last)/2
+//             //It is done to avoid integer sum overflow (first+last)
+//             mid=first+(last-first)/2;
+            
+//             //when target is found
+//             if(arr[mid]==x)
+//                 return {arr[mid],arr[mid]};
+                
+//             //when target is less than nums[mid]
+//             else if(arr[mid]>x)
+//                 last=mid-1;
+                
+//             //when target is greater than nums[mid]
+//             else
+//                 first=mid+1;
+//         }
+//         //when target x is lesser than smallest element of arr[]
+//         if(last==-1)
+//             return {-1,arr[first]};
+            
+//         return {arr[last],arr[first]};
+// }
+
+pair<int, int> getFloorAndCeil(int arr[], int n, int x) {
+    //when floor x is not present
+    int floor=-1;
+    int ceil=1000001;
+    for(int i=0;i<n;i++){
+        //Floor of X is the largest element 
+        //which is smaller than or equal to X.
+        if(arr[i]<=x){
+            floor=max(arr[i],floor);
+        }
+        //Ceil of X is the smallest element
+        //which is greater than or equal to X.
+        if(arr[i]>=x){
+            ceil=min(arr[i],ceil);
+        }
+    }
+    // when ceil of x is not present.
+    if(ceil==1000001){
+        ceil=-1;
+    }
+    return {floor,ceil};
+}
