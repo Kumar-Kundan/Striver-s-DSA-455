@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int first=0,last=nums.size()-1;
+        int mid;
+
+        while(first<=last){
+            //It is equal to (first+last)/2
+            //It is done to avoid integer sum overflow (first+last)
+            mid=first+(last-first)/2;
+
+            //when target is found
+            if(nums[mid]==target)
+                return mid;
+
+            //when target is less than nums[mid]
+            else if(nums[mid]>target)
+                last=mid-1;
+
+            //when target is greater than nums[mid]
+            else
+                first=mid+1;
+        }
+        //when target is not found
+        return -1;
+    }
+};
