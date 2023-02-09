@@ -1,0 +1,72 @@
+//{ Driver Code Starts
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+// } Driver Code Ends
+//User function template for C++
+class Solution{
+public:	
+	/* if x is present in arr[] then returns the count
+		of occurrences of x, otherwise returns 0. */
+	int count(int arr[], int n, int x) {
+	    int temp1=0,temp2=-1;
+        int first=0,last=n-1;
+        int mid;
+        //Finding starting position of given target value
+        while(first<=last){
+            mid=first+(last-first)/2;
+
+            //when target is found then refind on the left
+            //and save the mid
+            if(arr[mid]==x){
+                last=mid-1;
+                temp1=mid;
+            }
+            else if(arr[mid]>x)
+                last=mid-1;
+            else
+                first=mid+1;
+        }
+        //Finding ending position of given target value
+        first=0,last=n-1;
+        while(first<=last){
+            mid=first+(last-first)/2;
+
+            //when target is found then refind on the right
+            //and save the mid
+            if(arr[mid]==x){
+                first=mid+1;
+                temp2=mid;
+            }
+            else if(arr[mid]>x)
+                last=mid-1;
+            else
+                first=mid+1;
+        }
+        return temp2-temp1+1;
+	}
+};
+
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x;
+        cin >> n >> x;
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        Solution ob;
+        auto ans = ob.count(arr, n, x);
+        cout << ans << "\n";
+    }
+    return 0;
+}
+
+// } Driver Code Ends
