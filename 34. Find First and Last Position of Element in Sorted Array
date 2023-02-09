@@ -1,0 +1,80 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int size=nums.size();
+        vector<int> result(2,-1);
+
+        int first=0,last=size-1;
+        int mid;
+        //Finding starting position of given target value
+        while(first<=last){
+            mid=first+(last-first)/2;
+
+            //when target is found then refind on the left
+            //and save the mid
+            if(nums[mid]==target){
+                last=mid-1;
+                result[0]=mid;
+            }
+            else if(nums[mid]>target)
+                last=mid-1;
+            else
+                first=mid+1;
+        }
+        //Finding ending position of given target value
+        first=0,last=size-1;
+        while(first<=last){
+            mid=first+(last-first)/2;
+
+            //when target is found then refind on the right
+            //and save the mid
+            if(nums[mid]==target){
+                first=mid+1;
+                result[1]=mid;
+            }
+            else if(nums[mid]>target)
+                last=mid-1;
+            else
+                first=mid+1;
+        }
+        return result;
+    }
+
+    // vector<int> searchRange(vector<int>& nums, int target) {
+    //     int size=nums.size();
+    //     vector<int> result(2,-1);
+    //     if(size==0)
+    //        return result;
+
+    //     int first=0,last=size-1;
+    //     int mid;
+    //     //Finding starting position of given target value
+    //     while(first<=last){
+    //         mid=first+(last-first)/2;
+
+    //         if(nums[mid]>target-0.5)
+    //             last=mid-1;
+    //         else
+    //             first=mid+1;
+    //     }
+    //     result[0]=last+1;
+
+    //     //Finding ending position of given target value
+    //     first=0,last=size-1;
+    //     while(first<=last){
+    //         mid=first+(last-first)/2;
+
+    //         if(nums[mid]>target+0.5)
+    //             last=mid-1;
+    //         else
+    //             first=mid+1;
+    //     }
+    //     //when target is not found then return [-1,-1]
+    //     if(result[0]-1==last)
+    //          result[0]=-1;
+    //     else
+    //          result[1]=last;
+
+    //     return result;
+    // }
+};
