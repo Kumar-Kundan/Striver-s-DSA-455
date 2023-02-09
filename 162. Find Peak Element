@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int first=0,last=nums.size()-1;
+        int mid;
+
+        while(first<last){
+            mid=first+(last-first)/2;
+
+            //when nums[mid] is in left side of peak element
+            if(nums[mid]<nums[mid+1])
+                 first=mid+1;
+            
+            //for right side of peak element or for peak element
+            //we have taken last=mid so that we can catch the peak element
+            else 
+                 last=mid;
+        }
+        return first;
+    }
+};
