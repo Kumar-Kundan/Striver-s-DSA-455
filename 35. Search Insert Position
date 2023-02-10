@@ -1,0 +1,48 @@
+class Solution {
+public:
+    // int searchInsert(vector<int>& nums, int target) {
+    //     int first=0,last=nums.size()-1;
+    //     int mid;
+
+    //     while(first<=last){
+    //         //It is equal to (first+last)/2
+    //         //It is done to avoid integer sum overflow (first+last)
+    //         mid=first+(last-first)/2;
+
+    //         //when target is found
+    //         if(nums[mid]==target)
+    //             return mid;
+
+    //         //when target is less than nums[mid]
+    //         else if(nums[mid]>target)
+    //             last=mid-1;
+
+    //         //when target is greater than nums[mid]
+    //         else
+    //             first=mid+1;
+    //     }
+    //     //when target is not found
+    //     return first;
+    // }
+
+        int searchInsert(vector<int>& nums, int target) {
+        int first=0,last=nums.size()-1;
+        int mid;
+
+        while(first<=last){
+            //It is equal to (first+last)/2
+            //It is done to avoid integer sum overflow (first+last)
+            mid=first+(last-first)/2;
+
+            //when target is less than nums[mid]
+            if(nums[mid]<target)
+                first=mid+1;
+
+            //when target is greater than or equal to nums[mid]
+            else
+                last=mid-1;
+        }
+        //when target is not found
+        return first;
+    }
+};
