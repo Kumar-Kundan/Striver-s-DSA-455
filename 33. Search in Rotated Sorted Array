@@ -1,0 +1,90 @@
+class Solution {
+public:
+    // //Finding (k+1)index
+    // int findPivot(vector<int>nums){
+    //     int first=0,last=nums.size()-1;
+    //     int mid; 
+
+    //     while(first<last){
+    //         mid=first+(last-first)/2;
+
+    //         //when nums[mid] is greater or equal to first element
+    //         //then increment first=mid+1
+    //         if(nums[mid]>=nums[0])
+    //              first=mid+1;
+            
+    //         //when nums[mid] is less than first element
+    //         //then decrement last=mid
+    //         else
+    //             last=mid;
+    //     }
+    //     return first;
+    // }
+    // //Now applying binary search
+    // int binarySearch(vector<int>nums,int first,int last,int target){
+    //     int mid;
+
+    //     while(first<=last){
+    //         //It is equal to (first+last)/2
+    //         //It is done to avoid integer sum overflow (first+last)
+    //         mid=first+(last-first)/2;
+
+    //         //when target is found
+    //         if(nums[mid]==target)
+    //             return mid;
+
+    //         //when target is less than nums[mid]
+    //         else if(nums[mid]>target)
+    //             last=mid-1;
+
+    //         //when target is greater than nums[mid]
+    //         else
+    //             first=mid+1;
+    //     }
+    //     return -1;
+    // }
+    // int search(vector<int>& nums, int target) {
+    //     int size=nums.size(); 
+
+    //     int pivot=findPivot(nums);
+
+    //     if(nums[pivot]<=target && nums[size-1]>=target)
+    //         return binarySearch(nums,pivot,size-1,target);
+    //     else
+    //         return binarySearch(nums,0,pivot-1,target);
+    // }
+
+    int search(vector<int>& nums, int target) {
+        int first=0,last=nums.size()-1;
+        int mid;
+
+        while(first<=last){
+            //It is equal to (first+last)/2
+            //It is done to avoid integer sum overflow (first+last)
+            mid=first+(last-first)/2;
+
+            //when target is found
+            if(nums[mid]==target)
+                return mid;
+
+            //Here,we are using a property that 
+            //either first or second half will be in increasing order
+            else if(nums[first]<=nums[mid]){
+                //checking that target is in this sorted half or not
+                if(nums[mid]>target && nums[first]<=target)
+                   last=mid-1;
+                else
+                   first=mid+1;
+            }
+            //when second half is sorted
+            else{
+                if(nums[mid]<target && nums[last]>=target)
+                    first=mid+1;
+                else
+                    last=mid-1;
+            }
+        }
+        return -1;
+    }
+
+};
