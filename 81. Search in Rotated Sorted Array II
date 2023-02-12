@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        int first=0,last=nums.size()-1;
+        int mid;
+
+        while(first<=last){
+            //It is equal to (first+last)/2
+            //It is done to avoid integer sum overflow (first+last)
+            mid=first+(last-first)/2;
+
+            //when target is found
+            if(nums[mid]==target)
+                return true;
+
+            //when nums[first]=nums[mid]=nums[last] then
+            //we have issue where to go either left or right
+            else if((nums[first]==nums[mid])  && (nums[last]==nums[mid])){
+                ++first;
+                --last;
+            }
+            //Here,we are using a property that 
+            //either first or second half will be in increasing order
+            else if(nums[first]<=nums[mid]){
+                //checking that target is in this sorted half or not
+                if(nums[mid]>target && nums[first]<=target)
+                   last=mid-1;
+                else
+                   first=mid+1;
+            }
+            //when second half is sorted
+            else{
+                if(nums[mid]<target && nums[last]>=target)
+                    first=mid+1;
+                else
+                    last=mid-1;
+            }
+        }
+        return false;
+    }
+};
