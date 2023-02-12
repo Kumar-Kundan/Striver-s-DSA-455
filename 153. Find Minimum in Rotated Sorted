@@ -1,25 +1,44 @@
 class Solution {
 public:
+    // int findMin(vector<int>& nums) {
+    //    int first=0,last=nums.size()-1;
+    //    int mid;
+
+    //    while(first<last){
+    //        mid=first+(last-first)/2;
+
+    //        //when nums[mid] is greater or equal to first element
+    //        //then increment first=mid+1
+    //        if(nums[0]<=nums[mid])
+    //            first=mid+1;
+
+    //         //when nums[mid] is less than first element
+    //         //then decrement last=mid
+    //         else
+    //            last=mid;
+    //    }
+    //    //for n times rotation
+    //    if(nums[0]<nums[first])
+    //        return nums[0];
+    //    return nums[first];
+    // }
+
     int findMin(vector<int>& nums) {
-       int first=0,last=nums.size()-1;
-       int mid;
+        int first=0,last=nums.size()-1;
+        int mid;
 
-       while(first<last){
-           mid=first+(last-first)/2;
+        while(first<last){
+            mid=first+(last-first)/2;
 
-           //when nums[mid] is greater or equal to first element
-           //then increment first=mid+1
-           if(nums[0]<=nums[mid])
-               first=mid+1;
-
-            //when nums[mid] is less than first element
-            //then decrement last=mid
+            //as duplicate is not allowed and first!=last,so
+            //mid!=high and nums[mid]!=nums[high] is not possible
+            if(nums[mid]>nums[last])
+                //the minimum is in the right part
+                first=mid+1;
             else
-               last=mid;
-       }
-       //for n times rotation
-       if(nums[0]<nums[first])
-           return nums[0];
-       return nums[first];
+                //the minimum is in the left part
+                last=mid; 
+        }
+        return nums[first];          
     }
 };
