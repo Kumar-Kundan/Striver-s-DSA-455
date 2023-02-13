@@ -1,0 +1,58 @@
+class Solution {
+public:
+    // int singleNonDuplicate(vector<int>& nums) {
+    //     int first=0,last=nums.size()-1;
+    //     int mid;
+
+    //     while(first<last){
+    //         mid=first+(last-first)/2;
+
+    //         //special case when mid==0,mid-1 is not possible
+    //         if(mid==0)
+    //            return nums[first];
+
+    //         //the element which occur once is found
+    //         else if(nums[mid]!=nums[mid+1] && nums[mid]!=nums[mid-1])
+    //             return nums[mid];
+
+    //         //for even case
+    //         else if(mid%2==0){
+    //             //
+    //             if(nums[mid]==nums[mid-1])
+    //                 last=mid-1;
+    //             //nums[mid]==nums[mid+1]
+    //             else
+    //                 first=mid+1;
+    //         }
+    //         //for odd case
+    //         else{
+    //             if(nums[mid]==nums[mid-1])
+    //                 first=mid+1;
+    //             //nums[mid]==nums[mid+1] 
+    //             else
+    //                 last=mid-1;
+    //         }
+    //     }
+    //     //when first and last become equal
+    //     return nums[first];
+    // }
+    
+    int singleNonDuplicate(vector<int>& nums) {
+        int first=0,last=nums.size()-1;
+        int mid;
+
+        while(first<last){
+            mid=first+(last-first)/2;
+
+            //when the single element is in right side
+            if(mid%2==0 && nums[mid]==nums[mid+1] || mid%2==1 && nums[mid]==nums[mid-1])
+                first=mid+1;
+            //when the single element is in left side or at mid position
+            else
+                last=mid;
+        }
+        //when first and last become equal
+        return nums[first];
+    }
+    
+};
