@@ -14,7 +14,9 @@ public:
         int n=mat[0].size();
         int first=0,last=n-1;
         int mid;
-
+        //applying binary search in column and in mid column we are
+        //finding the maximum element ,if that element is peak then 
+        //return otherwise recurse at right half or left half
         while(first<=last){
             mid=first+(last-first)/2;
 
