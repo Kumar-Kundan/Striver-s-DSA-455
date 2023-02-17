@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int maxNumIndex(vector<vector<int>> mat,int col){
+        int max=0;
+
+        //finding index of the maximum element of 'col' column
+        for(int i=1;i<mat.size();++i){
+            if(mat[i][col]>mat[max][col])
+                max=i;
+        }
+        return max;
+    }
+    vector<int> findPeakGrid(vector<vector<int>>& mat) {
+        int n=mat[0].size();
+        int first=0,last=n-1;
+        int mid;
+
+        while(first<=last){
+            mid=first+(last-first)/2;
+
+            //row index of maximum element
+            int i=maxNumIndex(mat,mid);
+
+            //right element of maximum element of mid column is greater
+            //but not for last column 
+            if(mid!=n-1 && mat[i][mid]<mat[i][mid+1])
+                 first=mid+1;
+            //left element of maximum element of mid column is greater 
+            //but not for first column
+            else if(mid!=0 && mat[i][mid]<mat[i][mid-1])
+                last=mid-1;
+            //maximum element of mid column is peak
+            else
+                return {i,mid};
+        }
+        //if there is no peak element which is not possible
+        return {-1,-1};
+    }
+        
+};
