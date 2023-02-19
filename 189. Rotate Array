@@ -1,0 +1,41 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        // Your code goes here
+	    //rotating n times will become original array
+	    int d=k % nums.size();
+	    if(d>0){
+	      //reversing first d elements
+          reverse(nums,0,nums.size()-d-1);
+           
+          //reversing last n-d elements
+          reverse(nums,nums.size()-d,nums.size()-1);
+           
+          //reversing whole array
+          reverse(nums,0,nums.size()-1);
+        }
+    }
+    void reverse(vector<int>&nums,int p,int r){
+        int temp;
+        //swapping first half to second half elements
+        while(p<r){
+            temp=nums[p];
+            nums[p]=nums[r];
+            nums[r]=temp;
+            p++;r--;
+        }
+    }
+
+    // //using the concept of rotating array using modulus operator
+    // void rotate(vector<int>& nums, int k) {
+    //     int size=nums.size();
+    //     //taking a temporary array
+    //     vector<int>result(size);
+
+    //     for(int i=0;i<size;++i){
+    //         result[(i+k)%size]=nums[i];
+    //     }
+    //     //copying the element of result into nums
+    //     nums=result;
+    // }
+};
