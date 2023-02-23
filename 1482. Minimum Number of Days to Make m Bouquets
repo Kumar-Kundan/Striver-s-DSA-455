@@ -1,0 +1,96 @@
+class Solution {
+public:
+    // int minDays(vector<int>& bloomDay, int m, int k) {
+    //     int count,temp;
+    //     int size=bloomDay.size();
+
+    //     //impossible case
+    //     if(m*k>size)
+    //         return -1;
+    //     //finding maximum and minimum element
+    //     int max=INT_MIN,min=INT_MAX;
+    //     for(int i=0;i<size;++i){
+    //         if(max<bloomDay[i])
+    //             max=bloomDay[i];
+    //         if(min>bloomDay[i])
+    //             min=bloomDay[i];
+    //     }
+
+    //     //maximum element always be result
+    //     --max;
+    //     for(;max>=min;--max){
+    //         int count=0,temp=m;
+            
+    //         for(int j=0;j<size;++j){
+    //             //flower bloomed
+    //             if(bloomDay[j]<=max)
+    //                 ++count;
+    //             //flower not bloomed
+    //             else
+    //                 count=0;
+
+    //             //count satisfy no. of adjacent flower
+    //             if(count==k){
+    //                 count=0;
+    //                 --temp;
+    //             }   
+    //         }
+    //         //minimum day is found
+    //         if(temp>0)
+    //             return max+1;
+    //     }
+    //     //array size=1
+    //     return max+1;
+    // }
+    // //time complexity=O(n*(max-min))
+    // //time limit exceeded
+
+    //using binary search
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int count,temp;
+        int size=bloomDay.size();
+
+        //impossible case
+        if((long long)m*k>size)
+            return -1;
+
+        //finding maximum and minimum element
+        int max=INT_MIN,min=INT_MAX;
+        for(int i=0;i<size;++i){
+            if(max<bloomDay[i])
+                max=bloomDay[i];
+            if(min>bloomDay[i])
+                min=bloomDay[i];
+        }  
+
+        int first=min,last=max;
+        int mid;
+        while(first<last){
+            mid=first+(last-first)/2;
+            
+            int count=0,temp=m;
+            for(int j=0;j<size;++j){
+                //flower bloomed
+                if(bloomDay[j]<=mid)
+                    ++count;
+                //flower not bloomed
+                else
+                    count=0;
+
+                //count satisfy no. of adjacent flower
+                if(count==k){
+                    count=0;
+                    --temp;
+                }   
+            }
+            //not satisfy no. of adjacent flower
+            if(temp>0)
+                first=mid+1;
+            else
+                last=mid;
+        }
+        //minimum no. of day
+        return first;
+
+    }
+};
