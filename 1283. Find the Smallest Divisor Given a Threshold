@@ -1,0 +1,41 @@
+class Solution {
+public:
+    //finding sum of all the array element after dividing by divisor
+    int divisionSum(vector<int>nums, int divisor){
+        int sum=0;
+        for(auto num:nums)
+            sum+=ceil((num*1.0)/divisor);
+        return sum;
+    }
+    //using binary search
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int max=INT_MIN;
+
+        //finding maximum element
+        for(auto num:nums){
+            if(num>max)
+                max=num;
+        }
+        //when threshold equal to size of array
+        if(threshold==nums.size())
+           return max;
+
+        int first=1,last=max;
+        int mid;
+        while(first<last){
+            mid=first+(last-first)/2;
+
+            int sum=divisionSum(nums,mid);
+            
+            //when sum is greater than threshold 
+            //then increment divisor
+            if(sum>threshold)
+                first=mid+1;
+            //when sum is less than or equal to threshold 
+            //then decrement divisor to reach smaller divisor
+            else
+                last=mid;
+        }
+        return first;
+    }
+};
