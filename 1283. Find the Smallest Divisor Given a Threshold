@@ -28,11 +28,12 @@ public:
             int sum=divisionSum(nums,mid);
             
             //when sum is greater than threshold 
-            //then increment divisor
+            //then divisor is small so increment divisor
             if(sum>threshold)
                 first=mid+1;
             //when sum is less than or equal to threshold 
-            //then decrement divisor to reach smaller divisor
+            //then divisor is big
+            //so decrement divisor to reach smaller divisor
             else
                 last=mid;
         }
