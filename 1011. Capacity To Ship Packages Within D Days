@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int checkCapacity(vector<int> weights, int capacity, int days){
+        int sum=0;
+        cout<<"cap"<<capacity<<endl;
+        for(auto weight:weights){
+            //when capacity is full in a day
+            //then reduce 1 day and restart shipping
+            if(sum+weight>capacity){
+                sum=0;
+                --days;
+            }
+            sum+=weight;
+        }
+        return days;
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+        //maximum element will be lower bound
+        //sum will be upper bound
+        int max=INT_MIN,sum=0;
+        for(auto weight:weights){
+            if(max<weight)
+               max=weight;
+            sum+=weight;
+        }
+
+        //applying binary search
+        int first=max,last=sum;
+        int mid;
+        while(first<last){
+            mid=first+(last-first)/2;
+            
+            int temp=checkCapacity(weights,mid,days);
+
+            //more days required then increase the capacity
+            if(temp<=0)
+                first=mid+1;
+            //less days required then decrease the capacity
+            else
+                last=mid;
+        }
+        return first;
+    }
+};
