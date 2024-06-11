@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int subtractProductAndSum(int n) {
+        int r,product=1,sum=0;
+        
+        //Finding sum and product of digits of a number
+        while(n>0){
+            r=n%10;
+            sum=sum+r;
+            product=product*r;
+            n=n/10;
+        }
+        return product-sum;
+    }
+};
